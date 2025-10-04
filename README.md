@@ -123,10 +123,28 @@ Done! Created files:
   - index_de.html (updated)
 ```
 
+## Index File Setup
+
+**Important:** Your `index_en.html` and `index_de.html` files must contain the following marker comment where you want new entries to appear:
+
+```html
+<!-- Add new entry below -->
+```
+
+The script will automatically insert new blog entries right after this marker. Example:
+
+```html
+<ul>
+    <!-- Add new entry below -->
+    <li><a href="005_my_blog_post_en.html">My Blog Post</a> - October 4, 2025</li>
+    <li><a href="004_older_post_en.html">Older Post</a> - October 1, 2025</li>
+</ul>
+```
+
 ## Notes
 
 - All files are created locally - you must upload them to Neocities yourself
-- The script preserves existing index.html content and only adds new entries
+- The script automatically uses today's date for new entries
 - Entry numbering is automatic based on existing blog entries
 - Filenames are generated from the English title (lowercase, special characters converted to underscores)
 - The script will automatically try different OpenAI models (o1, o1-mini, gpt-4o) if one is unavailable

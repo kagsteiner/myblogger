@@ -31,10 +31,13 @@ STYLE_CSS = "style.css"
 DEFAULT_ENTRY_FILE = "entry.md"
 
 def fetch_url(url):
-    """Fetch content from URL"""
+    """Fetch content from URL with proper UTF-8 encoding"""
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
+        
+        # Ensure proper UTF-8 encoding
+        response.encoding = 'utf-8'
         return response.text
     except requests.RequestException as e:
         print(f"Error fetching {url}: {e}")
@@ -217,46 +220,38 @@ HTML to enhance:
         return html_content
 
 def update_index_html(index_html, entry_number, entry_filename, entry_title, is_english=True):
-    """Add new entry to index HTML"""
-    # Find where to insert the new entry - look for the blog entries list
-    # Typically after <main> or <ul> or similar structure
+    """Add new entry to index HTML by finding the marker comment"""
+    from datetime import datetime
     
     # Create the new entry line
     lang_suffix = "_en" if is_english else "_de"
-    date_text = "October 2, 2025" if is_english else "2. Oktober 2025"
     
-    # Look for an existing entry pattern to match the format
-    entry_pattern = r'<li>.*?</li>'
-    existing_entries = re.findall(entry_pattern, index_html, re.DOTALL)
-    
-    if existing_entries:
-        # Use the format of the first entry as template
-        new_entry = f'        <li><a href="{entry_number:03d}_{entry_filename}{lang_suffix}.html">{entry_title}</a> - {date_text}</li>'
+    # Format current date in the appropriate language
+    today = datetime.now()
+    if is_english:
+        date_text = today.strftime("%B %d, %Y")  # e.g., "October 4, 2025"
     else:
-        # Default format if no entries found
-        new_entry = f'        <li><a href="{entry_number:03d}_{entry_filename}{lang_suffix}.html">{entry_title}</a> - {date_text}</li>'
+        # German format: "4. Oktober 2025"
+        months_de = ["", "Januar", "Februar", "März", "April", "Mai", "Juni", 
+                     "Juli", "August", "September", "Oktober", "November", "Dezember"]
+        date_text = f"{today.day}. {months_de[today.month]} {today.year}"
     
-    # Find the blog entries list and add at the top (after <ul> or <main>)
-    # Look for <ul> tag in the main content area
-    ul_pattern = r'(<ul[^>]*>\s*)'
-    match = re.search(ul_pattern, index_html)
+    # Create the new entry with proper indentation
+    new_entry = f'                <li><a href="{entry_number:03d}_{entry_filename}{lang_suffix}.html">{entry_title}</a> - {date_text}</li>'
     
-    if match:
-        insert_pos = match.end()
-        updated_html = index_html[:insert_pos] + '\n' + new_entry + index_html[insert_pos:]
-        return updated_html
+    # Look for the marker comment
+    marker = "<!-- Add new entry below -->"
     
-    # Fallback: look for <main> tag
-    main_pattern = r'(<main[^>]*>)'
-    match = re.search(main_pattern, index_html)
+    if marker not in index_html:
+        print(f"  ⚠ Warning: Could not find marker '{marker}' in index HTML")
+        print(f"  → Please add this comment to your index file where new entries should appear")
+        return index_html
     
-    if match:
-        insert_pos = match.end()
-        updated_html = index_html[:insert_pos] + '\n    <ul>\n' + new_entry + '\n    </ul>' + index_html[insert_pos:]
-        return updated_html
+    # Split at the marker and insert the new entry
+    parts = index_html.split(marker, 1)
+    updated_html = parts[0] + marker + '\n' + new_entry + parts[1]
     
-    print("Warning: Could not find suitable insertion point in index HTML")
-    return index_html
+    return updated_html
 
 def main():
     """Main execution"""

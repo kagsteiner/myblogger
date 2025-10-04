@@ -1,51 +1,28 @@
-# Mein eigener Blog-Generator
+# Endlich AI in Videospielen?
 
-Ich bin ja ein großer Freund eines eigenen Blogs. Jetzt nicht eigen im Sinne von "eine große Blogging-Maschinerie gibt mir irgendwelche Lizenzrechte an meinen Einträgen", auch nicht im Sinne von "kann da Blogs hinschreiben und habe nicht 20 Seiten Anwaltsenglisch gelesen, was der Anbieter damit machen kann". Auch nicht "ich werde reich durch bloggen, auch wenn meine User alle ihre Daten offenbaren, ohne es zu wissen". Nein. Ein eigenes Blog. Auf einem fairen Webhoster.
+## Elons Ankündigung
 
-Der Anbieter meiner Wahl ist neocities. Ja, wie geocities damals. Gutes altes Internetgefühl.
+Vorgestern in den Nachrichten: https://www.foxbusiness.com/fox-news-tech/elon-musks-xai-hiring-video-game-developers
 
-Aber: Neocities hat nur einen ziemlich gräßlichen HTML-Editor. In diesem Blog beschreibe ich, wie man in 30 minuten zu einem Tool kommt, dass einem das Bloggen damit leicht macht. Also fast.
+Okay, ich bin wirklich kein Freund von Elon, der mit Millionen geholfen hat, in den USA einen kranken Soziopathen erneut in das einflussreichste Amt der Welt zu hieven. Aber das ist schon eine spannende Nachricht: xAI soll künftig auch Spiele entwickeln.
 
-Achtung, das wird ein ziemlich konkreter und technischer Post. Du bist gewarnt.
+Ich finde die Idee, LLMs in Spiele zu integrieren, ausgesprochen spannend. Und ich wundere mich, wie es 2025 sein kann, drei Jahre nach ChatpGPT 3.5, und auf dem Spielemarkt haben AI-gesteuerte NPCs noch keinen Durchbruch gefeiert. Vielleicht ändert Elon das.
 
-## Voraussetzungen
+## Meine Experimente
 
-Jupp, heftige Voraussetzungen. Ich habe Cursor + Claude Sonnet 4.5 verwendet. Vermutlich gehen auch andere LLM-Agentic-Entwicklungsumgebungen wie Claude Code oder Gemini CLI.
+Meine Experimente zu dem Thema waren spannend. Leider fehlt mir jegliche Begabung für schöne Graphiken malen, und mit AI-Hilfe Tiles malen… Naja… Aber die Spielmechanik war lustig. Das Grundprinzip ist, dass der Spieler mit einigen Waffen, Rüstungen, Schätzen und einigen NPCs in einem kleinen Level lebt, die NPCs alle einen Character entlang der "Big five personality traits" haben, und einen Job, also etwa Wächter, Friedenswächter, Pirat, Krieger, wilde Bestie. Sowohl Spieler als auch NPCs können Dinge nehmen, sich bewegen, miteinander reden, Dinge einem anderen geben, einen anderen angreifen. Und die NPCs wurden von LLMs gesteuert.
 
-Das ist schon mal blöd und kostet Geld. 
+[BILD]
 
-## Noch ne Erklärung
+Teilweise ergaben sich interessante Dialoge. 
 
-Mein Blog ist deutsch/englisch. Ich schreibe in deutsch, und will, dass die AI automatisch die englische Version macht.
+* Ich konnte einen Friedenswächter überzeugen, mir seine Waffe zu geben, um mich gegen ein aggressives Tier zu wehren.
+* Ich konnte einen fahrenden Händler einschüchtern, damit er mir seine Schätze gibt
+* In einem längeren Dialog entschloss sich ein Friedenswächter, mit mir gemeinsam durch das Dungeon zu gehen.
 
-## Lost geht's. Der Prompt.
+Mein Spiel ist natürlich Mist; ich habe kein AI Entwicklungsteam, das mir eine spezialisierte Spiele-LLM baut, die klein, schnell und dennoch zuverlässig ist. Ich musste mich auf die Standard-LLMs verlassen, und mit Ausnahme von Mistral dauerte jeder Spielzug 10 Sekunden. 
 
-Gar keine einfache Sache - Beispiels-HTML lesen, Markdown-Text in HTML transferieren, der genauso funktionert, zweisprachige index.html updaten, und vor allem ChatGPT aufrufen, damit es den deutschen Text auf englisch übersetzt. Und etliche Kleinigkeiten.
+Dennoch ist meine Erkenntnis, dass die oft dumpfen Interaktionen in normalen RPGs wie Skyrim, wo Kontakt mit NPCs entweder gescripteter Dialog oder Kampf ist, in einem solchen Spiel mit echten AIs ganz anders, viel spannender, unerwarteter, kreativer laufen.
 
-## Und die AI werkelt los.
-
-Einmal musste ich sie unterbrechen, weil sie sich in einem curl Kommando irgendwie aufgehängt hatte.
-
-Danach war sie bereit. Ausprobiert. Tut nicht. Komischer Fehler. WIE? NICHT PERFEKT? Ich kopiere die gesamte Fehlermeldung in den Chat, das LLM erkennt, dass wohl eine veraltete OpenAI Version installiert wurde, ändert das. Danach will die Maschine es genau wissen, probiert die App aus, vergleicht, ob sie funktioniert, schaut, ob das Ergebnis in beiden Sprachen passt. Schaut, ob die index_de/en.html stimmen.
-
-Als die AI sagt "Fertig", ist fertig.
-
-Fast.
-
-## Was geht und was nicht.
-
-Okay, ich geb's zu, ich habe ChatGPT damals belogen, als ich mich registriere. Dort heisse ich "Karl Stein". Und prompt generiert ChatGPT mir in den übersetzten Text Karl Stein als meinen Namen. Seltsamerweise sogar im  Python-File, das ja eigentlich nicht ChatGPT sondern Claude Sonnet generiert hat. Hab ich da auch geschwindelt? 
-
-Das habe ich, obschon praktisch keine Python-Kenntnisse, manuell geändert.
-
-Und die Reihenfolge der Einträge im index.html stimmt nicht. Da hat sie eigentlich recht, die AI, neue Einträge gehören nach oben, nicht nach unten.
-
-Aber sonst stimmt alles. 
-
-## Ergebnis
-
-15 Minuten Spec schreiben, 15 Minuten mit der AI arbeiten, bis das Skript steht, ein paar Nacharbeiten. Passt. Jetzt habe ich ein Python-Programm, das mir die Arbeit abnimmt. Alles, was ich jetzt tun muss, ist einen Blog-Eintrag als Markdown schreiben, und bekomme zwei HTML-Files in korrekter Formatierung + neue Index-Files. Fein.
-
-Willst du sowas auch? Idealerweise für neocities? Schreib mir.
-
+Seit meinem Experiment warte ich also auf ein Spiel, das das mal richtig macht. Bisher ohne Erfolg. Vielleicht macht's ja Elon möglich.
 
