@@ -56,7 +56,7 @@ def get_next_entry_number(index_html):
     return highest + 1
 
 def translate_to_english(german_text, api_key):
-    """Translate German markdown to English using OpenAI o1"""
+    """Translate German markdown to English using OpenAI gpt-5 or o1"""
     try:
         client = OpenAI(
             api_key=api_key,
@@ -65,7 +65,7 @@ def translate_to_english(german_text, api_key):
         )
         
         # Try o1 models in order of preference
-        models_to_try = ["o1", "o1-mini", "o1-preview", "gpt-4o", "gpt-4-turbo"]
+        models_to_try = ["gpt-5", "o1", "o1-mini", "o1-preview", "gpt-4o", "gpt-4-turbo"]
         
         response = None
         last_error = None
@@ -193,14 +193,13 @@ HTML to enhance:
 
     try:
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-5",
             messages=[
                 {
                     "role": "user",
                     "content": prompt
                 }
-            ],
-            temperature=0.3  # Lower temperature for more consistent output
+            ]
         )
         
         enhanced_html = response.choices[0].message.content.strip()

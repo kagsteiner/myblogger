@@ -1,28 +1,26 @@
-# Endlich AI in Videospielen?
+# Zusammenfassung meines Experiments mit AI in RPGMaker
 
-## Elons Ankündigung
+## Das Plugin
 
-Vorgestern in den Nachrichten: https://www.foxbusiness.com/fox-news-tech/elon-musks-xai-hiring-video-game-developers
+Die Grundidee des Experiments war, ein Plugin zu schreiben, das es dem Spieleentwickler (mir) erlaubt, beliebige LLMs als NPCs zu verwenden - im RPGMaker MZ im Rahmen eines Events. Dazu brauchte ich neben Plugin-Kommandos, um dem LLM zu sagen, was es machen soll, sowohl Aktionen, die das LLM im RPGMaker ausführen kann - das Event bewegen, etwas sagen, einen Gegenstand weggeben, einen Schalter betätigen, als auch die Möglichkeit für den Spieler, einfach auf Aktionen des NPC zu reagieren: Aktiv einen Chat einleiten, auf eine Chat-Nachricht antworten, einen Gegenstand geben.
 
-Okay, ich bin wirklich kein Freund von Elon, der mit Millionen geholfen hat, in den USA einen kranken Soziopathen erneut in das einflussreichste Amt der Welt zu hieven. Aber das ist schon eine spannende Nachricht: xAI soll künftig auch Spiele entwickeln.
+Und dem LLM musste genug über die Situation beigebracht werden, damit es vernünftige Entscheidungen treffen kann: wer ist der NPC? Wo befindet er sich? Wo sind Spieler und andere Events? Was ist bisher passiert? Welche Gegenstände besitzt er? Und was will er?
 
-Ich finde die Idee, LLMs in Spiele zu integrieren, ausgesprochen spannend. Und ich wundere mich, wie es 2025 sein kann, drei Jahre nach ChatpGPT 3.5, und auf dem Spielemarkt haben AI-gesteuerte NPCs noch keinen Durchbruch gefeiert. Vielleicht ändert Elon das.
+Mit Hilfe der Entwicklungsumgebung Cursor und einem LLM - ich bin kürzlich von Claude 4.5 auf GPT 5 umgestiegen - war das Entwickeln eines Plugins mit diesen Features problemlos. Ich war erstaunt von dem umfassenden Wissen der Maschine bzgl der Entwicklung von RPGMaker Plugins, was jetzt ja nicht die gewöhnlichste Entwicklungsarbeit der Welt ist. Ein paar Kleinigkeiten haben anfangs nicht funktioniert. Aber „Vibe Coding“ (ich hasse den Begriff) hat funktioniert. Ich weiß nur grob, wie mein Plugin funktioniert.
 
-## Meine Experimente
+## Freud und Leid der LLMs
 
-Meine Experimente zu dem Thema waren spannend. Leider fehlt mir jegliche Begabung für schöne Graphiken malen, und mit AI-Hilfe Tiles malen… Naja… Aber die Spielmechanik war lustig. Das Grundprinzip ist, dass der Spieler mit einigen Waffen, Rüstungen, Schätzen und einigen NPCs in einem kleinen Level lebt, die NPCs alle einen Character entlang der "Big five personality traits" haben, und einen Job, also etwa Wächter, Friedenswächter, Pirat, Krieger, wilde Bestie. Sowohl Spieler als auch NPCs können Dinge nehmen, sich bewegen, miteinander reden, Dinge einem anderen geben, einen anderen angreifen. Und die NPCs wurden von LLMs gesteuert.
+Die Unterschiede zwischen den großen proprietären Modellen auf den großen Servern und dem, was man lokal laufen lassen kann, sind gewaltig. Aber auch die Kosten.
 
-[BILD]
+Übergibt man des Schicksal seines NPCs dem GPT-5, ist fast alles gut. Der NPC verhält sich, wie man es von einem Menschen erwartet. Verfolgt Ziele auf vernünftige Weise, ist in der Lage, realistisch mit Gegenständen zu handeln, hält sich an Randbedingungen im Prompt. Allerdings ist das Modell sehr langsam - wer will 5 Sekunden auf jede Aktion warten? Und es ist sehr teuer. 
 
-Teilweise ergaben sich interessante Dialoge. 
+Ursprünglich habe ich ausschließlich mit Mistral Large gearbeitet. Das ist nicht ganz so clever wie GPT-5, aber viel schneller. Jede Sekunde eine Aktion. Fast brauchbar. Nach 3 Tagen herumspielen dann der Kostenschock: Ja, 2 NPCs, die pro Sekunde einen LLM Call machen, sind 120 Calls pro Minute, und wenn man ausführliche Prompts incl. Umgebungsbeschreibung, Gegenstände, Historie mitgibt, zahlt man für gar nicht so langes Testen 6 Euro. Witzigerweise ist Mistral Large teurer als GPT-5, und weil‘s auch nochmal fünfmal schneller ist, verfünffacht sich dieser Unterschied.
 
-* Ich konnte einen Friedenswächter überzeugen, mir seine Waffe zu geben, um mich gegen ein aggressives Tier zu wehren.
-* Ich konnte einen fahrenden Händler einschüchtern, damit er mir seine Schätze gibt
-* In einem längeren Dialog entschloss sich ein Friedenswächter, mit mir gemeinsam durch das Dungeon zu gehen.
+Im Anschließenden Rundumtest mit 11 LLMs zeigte sich, dass zum einen lokale Modelle sich nicht wirklich wie ein echter Mensch anfühlen und normale NPC-Aufgaben und Beschränkungen nicht bewältigen können, und zum anderen am ehesten GPT-5-mini den Preis-Leistungs-Kompromiss am Besten schafft. Wenn es nicht auch so langsam wäre - 5 Sekunden gehen für fast alle NPC-Situationen nicht.
 
-Mein Spiel ist natürlich Mist; ich habe kein AI Entwicklungsteam, das mir eine spezialisierte Spiele-LLM baut, die klein, schnell und dennoch zuverlässig ist. Ich musste mich auf die Standard-LLMs verlassen, und mit Ausnahme von Mistral dauerte jeder Spielzug 10 Sekunden. 
+Ich werde jetzt mal schauen, wie ich in einem echten kleinen Spiel damit vorankomme, aber ich fürchte, es muss noch die LLM-Ewigkeit von einem halben Jahr ins Land gehen, bis man RPGMaker-Spiele mit LLM-NPCs bauen kann, die auch Spaß machen. 
 
-Dennoch ist meine Erkenntnis, dass die oft dumpfen Interaktionen in normalen RPGs wie Skyrim, wo Kontakt mit NPCs entweder gescripteter Dialog oder Kampf ist, in einem solchen Spiel mit echten AIs ganz anders, viel spannender, unerwarteter, kreativer laufen.
+Unabhängig von den technischen Problem - Performance und Fähigkeiten der LLMs ist das ganz schön trickreich. Wenn die NPCs plötzlich eine große Handlungsfreiheit haben, wird es schwierig, eine stringente Handlung zu realisieren.
 
-Seit meinem Experiment warte ich also auf ein Spiel, das das mal richtig macht. Bisher ohne Erfolg. Vielleicht macht's ja Elon möglich.
+
 
