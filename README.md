@@ -4,7 +4,7 @@ A Python script to automatically create bilingual blog entries (German and Engli
 
 This is purely something I have written for myself, to be used by me, not intended to be used by someone else - it should work if you have a neocities account and are a native speaker of German and would like to keep a very simple blog there.
 
-I'm very happy with it and use it regularly. I just write a German blog entry in entry.md, and the script will give my post a title and a consecutive number, will translate it to English, will intelligently add hyperlinks to common pages, will copy the index_en.html and index_de.html from my neocities account, add a line to the new blog posts. All I then have to do is proofread and upload to my neocities blog.
+I'm very happy with it and use it regularly. I just write a German blog entry in entry.md, and the script will give my post a title and a consecutive number, will translate it to English, will intelligently add hyperlinks to common terms, will copy the index_en.html and index_de.html from my neocities account, add a line to the new blog posts. All I then have to do is proofread and upload to my neocities blog.
 
 ## Features
 
@@ -15,6 +15,7 @@ I'm very happy with it and use it regularly. I just write a German blog entry in
 - **Intelligently adds hyperlinks** to keywords using GPT-4o (technologies, products, companies)
 - Creates both German and English HTML files
 - Updates index files for both languages
+- replaces text like this: "img=images/screenshot.png alt=My amazing screenshot" with HTML image tags.
 
 ## Requirements
 
