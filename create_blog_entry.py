@@ -65,7 +65,7 @@ def translate_to_english(german_text, api_key):
         )
         
         # Try o1 models in order of preference
-        models_to_try = ["gpt-5", "o1", "o1-mini", "o1-preview", "gpt-4o", "gpt-4-turbo"]
+        models_to_try = ["gpt-5.1-2025-11-13", "gpt-5", "o1", "o1-mini", "o1-preview", "gpt-4o", "gpt-4-turbo"]
         
         response = None
         last_error = None
@@ -112,12 +112,37 @@ def title_to_filename(title):
     filename = re.sub(r'_+', '_', filename).strip('_')
     return filename
 
+def process_custom_images(md_text):
+    """Process custom image syntax: img=name alt=alttitle"""
+    # Pattern to match: img=source alt=alttext (on its own line)
+    # Allows for optional whitespace around the = signs
+    pattern = r'^img\s*=\s*(\S+)\s+alt\s*=\s*(.+)$'
+    
+    lines = md_text.split('\n')
+    processed_lines = []
+    
+    for line in lines:
+        match = re.match(pattern, line.strip())
+        if match:
+            src = match.group(1)
+            alt = match.group(2).strip()
+            # Replace with HTML image tag
+            html_img = f'<p><img src="{src}" alt="{alt}" width="100%"></img></p>'
+            processed_lines.append(html_img)
+        else:
+            processed_lines.append(line)
+    
+    return '\n'.join(processed_lines)
+
 def markdown_to_html(md_text):
     """Convert markdown to HTML"""
     # Clean the markdown text - remove BOM and normalize whitespace
     md_text = md_text.strip()
     if md_text.startswith('\ufeff'):
         md_text = md_text[1:]
+    
+    # Process custom image syntax before markdown conversion
+    md_text = process_custom_images(md_text)
     
     # Enable extra extensions for better formatting
     html = markdown.markdown(md_text, extensions=['extra', 'nl2br'])
@@ -168,7 +193,7 @@ def enhance_html_with_links(html_content, api_key, is_english=True):
     """Use GPT to add relevant hyperlinks to keywords in the HTML"""
     client = OpenAI(
         api_key=api_key,
-        timeout=60.0,
+        timeout=120.0,
         max_retries=2
     )
     
@@ -191,16 +216,31 @@ Return ONLY the modified HTML content, with no explanations or additional text.
 HTML to enhance:
 {html_content}"""
 
+    # Try models in order of preference
+    models_to_try = ["gpt-5.1-2025-11-13", "gpt-4o", "gpt-4-turbo", "gpt-4"]
+    
     try:
-        response = client.chat.completions.create(
-            model="gpt-5",
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ]
-        )
+        response = None
+        last_error = None
+        
+        for model in models_to_try:
+            try:
+                response = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {
+                            "role": "user",
+                            "content": prompt
+                        }
+                    ]
+                )
+                break
+            except Exception as e:
+                last_error = e
+                continue
+        
+        if response is None:
+            raise last_error
         
         enhanced_html = response.choices[0].message.content.strip()
         
@@ -210,7 +250,7 @@ HTML to enhance:
             enhanced_html = '\n'.join(lines[1:-1]) if len(lines) > 2 else enhanced_html
             enhanced_html = enhanced_html.strip()
         
-        print(f"  ✓ Enhanced with hyperlinks using GPT-4o")
+        print(f"  ✓ Enhanced with hyperlinks using {model}")
         return enhanced_html
         
     except Exception as e:

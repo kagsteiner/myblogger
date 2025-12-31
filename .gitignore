@@ -11,6 +11,8 @@ __pycache__/
 *_en.html
 index_de.html
 index_en.html
+entry2.md
+another_entry.md
 
 # IDE
 .vscode/
@@ -22,6 +24,7 @@ index_en.html
 # OS
 .DS_Store
 Thumbs.db
+
 
 
 
