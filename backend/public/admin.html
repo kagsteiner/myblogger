@@ -470,7 +470,7 @@
 
       commentList.innerHTML = comments.map(comment => `
         <div class="comment-card" data-id="${comment.commentId}">
-          <button class="danger delete-btn" onclick="deleteComment(${comment.commentId})" title="Delete comment">
+          <button class="danger delete-btn" data-comment-id="${comment.commentId}" title="Delete comment">
             🗑️ Delete
           </button>
           <div class="comment-meta">
@@ -484,6 +484,17 @@
         </div>
       `).join('');
     }
+
+    // Event delegation for delete buttons
+    commentList.addEventListener('click', (e) => {
+      const deleteBtn = e.target.closest('.delete-btn');
+      if (deleteBtn) {
+        const commentId = deleteBtn.dataset.commentId;
+        if (commentId) {
+          deleteComment(parseInt(commentId, 10));
+        }
+      }
+    });
 
     // Delete Comment
     async function deleteComment(commentId) {
