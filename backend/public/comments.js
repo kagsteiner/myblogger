@@ -85,8 +85,7 @@
         .cs-container {
           margin-top: 2rem;
           padding-top: 2rem;
-          border-top: 1px solid currentColor;
-          opacity: 0.8;
+          border-top: 1px solid #00ffff30;
         }
 
         .cs-container * {
@@ -106,22 +105,26 @@
           font-size: 1.25em;
           font-weight: bold;
           margin: 0;
+          color: #00ffff;
         }
 
         .cs-btn {
           display: inline-block;
           padding: 0.5em 1em;
-          border: 1px solid currentColor;
+          border: 1px solid #00ffff30;
           background: transparent;
-          color: inherit;
+          color: #e0e0e0;
           font-family: inherit;
           font-size: 0.9em;
           cursor: pointer;
-          transition: opacity 0.2s;
+          border-radius: 4px;
+          transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         .cs-btn:hover {
-          opacity: 0.7;
+          background-color: #00ffff;
+          color: #0a0f18;
+          border-color: #00ffff;
         }
 
         .cs-btn:disabled {
@@ -130,16 +133,23 @@
         }
 
         .cs-btn-primary {
-          background: currentColor;
-          color: inherit;
-          filter: invert(1);
+          background: #00ffff;
+          color: #0a0f18;
+          border-color: #00ffff;
+          font-weight: bold;
+        }
+
+        .cs-btn-primary:hover {
+          background: #60cfcf;
+          border-color: #60cfcf;
         }
 
         .cs-form {
           margin-bottom: 2rem;
           padding: 1rem;
-          border: 1px solid currentColor;
-          opacity: 0.9;
+          border: 1px solid #00ffff30;
+          border-radius: 8px;
+          background: #141a2880;
         }
 
         .cs-form-group {
@@ -156,16 +166,18 @@
         .cs-input {
           width: 100%;
           padding: 0.5em;
-          border: 1px solid currentColor;
-          background: transparent;
-          color: inherit;
+          border: 1px solid #00ffff30;
+          border-radius: 4px;
+          background: #0a0f18;
+          color: #e0e0e0;
           font-family: inherit;
           font-size: 1em;
         }
 
         .cs-input:focus {
-          outline: 2px solid currentColor;
-          outline-offset: 2px;
+          outline: none;
+          border-color: #00ffff;
+          box-shadow: 0 0 10px #00ffff1a;
         }
 
         .cs-textarea {
@@ -182,15 +194,19 @@
         .cs-message {
           padding: 1rem;
           margin-bottom: 1rem;
-          border: 1px solid currentColor;
+          border-radius: 4px;
         }
 
         .cs-message-success {
-          opacity: 0.8;
+          background: #00ffff15;
+          border: 1px solid #00ffff50;
+          color: #00ffff;
         }
 
         .cs-message-error {
-          opacity: 0.9;
+          background: #ff555515;
+          border: 1px solid #ff555550;
+          color: #ff5555;
         }
 
         .cs-comment-list {
@@ -200,8 +216,7 @@
 
         .cs-comment {
           padding: 1rem 0;
-          border-bottom: 1px solid currentColor;
-          opacity: 0.6;
+          border-bottom: 1px solid #00ffff20;
         }
 
         .cs-comment:last-child {
@@ -219,6 +234,7 @@
 
         .cs-comment-author {
           font-weight: bold;
+          color: #00ffff;
         }
 
         .cs-comment-date {

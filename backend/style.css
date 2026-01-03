@@ -1,0 +1,244 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --primary-bg-color: #0a0f18;
+    /* Deep space blue */
+    --secondary-bg-color: #141a28;
+    /* Slightly lighter blue/grey */
+    --accent-color: #00ffff;
+    /* Cyan / Aqua */
+    --text-color: #e0e0e0;
+    /* Light grey for text */
+    --header-text-color: #ffffff;
+    --link-color: #a0ffff;
+    /* A brighter, lighter cyan */
+    --link-hover-color: #60cfcf;
+    /* A corresponding darker hover color */
+    --link-visited-color: #50fa7b;
+    /* Bright Green for visited links - ADDED */
+    --border-color: #00ffff30;
+    /* Accent with transparency */
+    --shadow-color: #00ffff1a;
+
+    --font-primary: 'Orbitron', sans-serif;
+    /* Futuristic, for headers */
+    --font-secondary: 'Roboto', sans-serif;
+    /* Clean, for body text */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-secondary);
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 80px;
+    /* Space for fixed header */
+}
+
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: var(--secondary-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+header.main-header {
+    background-color: var(--secondary-bg-color);
+    color: var(--header-text-color);
+    padding: 1rem 0;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 15px #00000060;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+header.main-header h1 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    margin-bottom: 0.2rem;
+}
+
+header.main-header h1 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header.main-header .subtitle {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-style: italic;
+}
+
+/* --- Unchanged rules from here to article links --- */
+
+nav.main-nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+nav.main-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav.main-nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav.main-nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+article h2.post-title {
+    font-family: var(--font-primary);
+    color: var(--accent-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+article .post-meta {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin-bottom: 1.5rem;
+}
+
+article .post-meta .lang-switch a {
+    font-weight: bold;
+}
+
+article p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+}
+
+/* This is the section for links within blog posts */
+article a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--link-color);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+/* This rule makes visited links in articles use the new color */
+article a:visited {
+    /* ADDED */
+    color: var(--link-visited-color);
+    border-bottom-color: var(--link-visited-color);
+}
+
+article a:hover {
+    color: var(--link-hover-color);
+    border-bottom-color: var(--link-hover-color);
+}
+
+/* Add this to your style.css with other link styles */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    /* Optional: removes underline from all links */
+}
+
+/* This general rule ensures all other links (like in your post list) also get the new visited color */
+a:visited {
+    /* ADDED */
+    color: var(--link-visited-color);
+}
+
+
+/* --- Unchanged rules from here to the end --- */
+
+article ul,
+article ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+article ul li,
+article ol li {
+    margin-bottom: 0.5rem;
+}
+
+.post-navigation {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.post-navigation a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.post-navigation a:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    border-color: var(--accent-color);
+}
+
+.hashtags {
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: #a0a0a0;
+}
+
+.hashtags span {
+    margin-right: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    background-color: #ffffff10;
+    border-radius: 3px;
+    font-size: 0.8rem;
+}
+
+footer.main-footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+    /* Pushes footer to the bottom */
+    background-color: var(--secondary-bg-color);
+    color: #a0a0a0;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+}
+
+footer.main-footer a {
+    color: var(--accent-color);
+}
