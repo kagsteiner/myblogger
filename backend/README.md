@@ -1,6 +1,8 @@
 # Blog Comment System
 
 A simple, self-hosted comment system for static blogs hosted on neocities.org (or similar platforms).
+for my
+I have created this solely for the purpose of hosting a comment system for my blog at neocities.org using my own VPS on hostinger. Its only purpose is to serve as an example. Feel free to adapt it as you wish, but do not expect any kind of support from me. 
 
 ## Features
 
