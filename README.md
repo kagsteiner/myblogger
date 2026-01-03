@@ -2,20 +2,27 @@
 
 A Python script to automatically create bilingual blog entries (German and English) for your Neocities blog.
 
+This is purely something I have written for myself, to be used by me, not intended to be used by someone else - it should work if you have a neocities account and are a native speaker of German and would like to keep a very simple blog there.
+
+I'm very happy with it and use it regularly. I just write a German blog entry in entry.md, and the script will give my post a title and a consecutive number, will translate it to English, will intelligently add hyperlinks to common terms, will copy the index_en.html and index_de.html from my neocities account, add a line to the new blog posts. All I then have to do is proofread and upload to my neocities blog.
+
+Currently uses OpenAI GPT-5.1.
+
 ## Features
 
 - Fetches existing blog index files from your Neocities blog
 - Automatically determines the next entry number
 - Translates German markdown to English using OpenAI o1
 - Converts markdown to HTML with proper blog structure
-- **Intelligently adds hyperlinks** to keywords using GPT-4o (technologies, products, companies)
+- **Intelligently adds hyperlinks** to keywords (technologies, products, companies)
 - Creates both German and English HTML files
 - Updates index files for both languages
+- replaces text like this: "img=images/screenshot.png alt=My amazing screenshot" with HTML image tags.
 
 ## Requirements
 
 - Python 3.7+
-- OpenAI API key with access to o1-preview model
+- OpenAI API key 
 
 ## Setup
 
@@ -91,37 +98,6 @@ The enhancement:
 - Preserves all existing HTML structure
 - Works for both German and English content
 
-## Example Output
-
-When you run the script, you'll see output like this:
-
-```
-Fetching blog index files...
-Next entry number: 005
-Reading entry from entry.md...
-German title: Die Zukunft mit AI - Coding und sonst
-Translating to English using OpenAI o1...
-Using model: o1
-English title: The Future with AI – Coding and More
-Filename base: the_future_with_ai_coding_and_more
-Converting markdown to HTML...
-Enhancing HTML with hyperlinks...
-  → Analyzing German content...
-  ✓ Enhanced with hyperlinks using GPT-4o
-  → Analyzing English content...
-  ✓ Enhanced with hyperlinks using GPT-4o
-Writing 005_the_future_with_ai_coding_and_more_de.html...
-Writing 005_the_future_with_ai_coding_and_more_en.html...
-Updating index files...
-Writing index_en.html...
-Writing index_de.html...
-
-Done! Created files:
-  - 005_the_future_with_ai_coding_and_more_de.html
-  - 005_the_future_with_ai_coding_and_more_en.html
-  - index_en.html (updated)
-  - index_de.html (updated)
-```
 
 ## Index File Setup
 
