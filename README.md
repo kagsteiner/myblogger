@@ -18,6 +18,7 @@ Currently uses OpenAI GPT-5.1.
 - Creates both German and English HTML files
 - Updates index files for both languages
 - replaces text like this: "img=images/screenshot.png alt=My amazing screenshot" with HTML image tags.
+- Contains my own blog comment system to allow users adding comments and me moderating them.
 
 ## Requirements
 
