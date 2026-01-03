@@ -8,6 +8,8 @@ I'm very happy with it and use it regularly. I just write a German blog entry in
 
 Currently uses OpenAI GPT-5.1.
 
+The specifications to get a state of the art LLM to create such an app can be found in the .md files in this folder (specification.md, commentsystem.md)
+
 ## Features
 
 - Fetches existing blog index files from your Neocities blog
