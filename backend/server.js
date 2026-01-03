@@ -51,6 +51,8 @@ app.use(helmet({
       imgSrc: ["'self'", "data:"],
     },
   },
+  // Allow the comments.js script to be loaded from other origins (neocities)
+  crossOriginResourcePolicy: { policy: "cross-origin" },
 }));
 
 // CORS - allow only neocities.org domains
@@ -61,14 +63,15 @@ const corsOptions = {
     if (!origin) {
       return callback(null, true);
     }
-    
-    // Allow *.neocities.org and localhost for development
+
+    // Allow *.neocities.org, the server itself, and localhost for development
     const allowedPatterns = [
       /^https?:\/\/.*\.neocities\.org$/,
+      /^https?:\/\/srv706843\.hstgr\.cloud$/,
       /^https?:\/\/localhost(:\d+)?$/,
       /^https?:\/\/127\.0\.0\.1(:\d+)?$/
     ];
-    
+
     const isAllowed = allowedPatterns.some(pattern => pattern.test(origin));
     if (isAllowed) {
       callback(null, true);
@@ -165,14 +168,14 @@ app.post('/api/login', (req, res) => {
   }
 
   const isValid = bcrypt.compareSync(password, ADMIN_PASSWORD_HASH);
-  
+
   if (!isValid) {
     return res.status(401).json({ error: 'Invalid password' });
   }
 
   // Generate JWT token (valid for 24 hours)
   const token = jwt.sign({ role: 'moderator' }, JWT_SECRET, { expiresIn: '24h' });
-  
+
   res.json({ token });
 });
 
@@ -208,11 +211,11 @@ app.post('/api/comments', commentLimiterPerMinute, commentLimiterPerHour, (req, 
       INSERT INTO comments (blogEntryId, name, text, released)
       VALUES (?, ?, ?, 0)
     `);
-    
+
     const result = stmt.run(sanitizedBlogEntryId, sanitizedName, sanitizedText);
-    
-    res.status(201).json({ 
-      success: true, 
+
+    res.status(201).json({
+      success: true,
       message: 'Comment submitted for moderation',
       commentId: result.lastInsertRowid
     });
@@ -306,8 +309,8 @@ app.post('/api/comments/release', authenticateToken, (req, res) => {
     const stmt = db.prepare('UPDATE comments SET released = 1 WHERE released = 0');
     const result = stmt.run();
 
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: `Released ${result.changes} comment(s)`,
       releasedCount: result.changes
     });
