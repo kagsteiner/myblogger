@@ -178,7 +178,12 @@ def create_blog_html(content_html, title, is_english=True):
     <main class="container">
         <article>
 {content_html}
+
+        <div id="comments"></div>
+        <script src="https://srv706843.hstgr.cloud/comments.js"></script>
+    
         </article>
+        
     </main>
     
     <footer class="main-footer">
